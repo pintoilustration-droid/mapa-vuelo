@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+     <div style="position: fixed; 
+                 bottom: 50px; left: 10px; width: 260px; 
+                 background-color: white; 
+                 border:2px solid grey; 
+                 z-index:9999; 
+                 padding:10px; font-size:12px;">
+     <b>Mapa de vuelos</b><br>
+     - Líneas: cantidad de vuelos por ruta (grosor).<br>
+     - Círculos: total de vuelos por ciudad (tamaño).<br>
+     - Se incluyen rutas nacionales y algunas internacionales.<br>
+     </div>
+     
+    
+            <div class="folium-map" id="map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d = L.map(
+                "map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d",
+                {
+                    center: [23.0, -100.0],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 4,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_f853c56755d1bd120f14eba6c074e9c5 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_f853c56755d1bd120f14eba6c074e9c5.addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            var poly_line_a7811b287ffc4d8826562e45bda7daef = L.polyline(
+                [[40.6413, -73.7781], [19.4361, -99.0719]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 11.0}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_a7811b287ffc4d8826562e45bda7daef.bindTooltip(
+                `<div>
+                     JFK → MEX: 44 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_9ed754e0cd6c40d56f48aa157bf5b01b = L.polyline(
+                [[19.4361, -99.0719], [40.6413, -73.7781]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 11.0}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_9ed754e0cd6c40d56f48aa157bf5b01b.bindTooltip(
+                `<div>
+                     MEX → JFK: 44 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_2611a7c24cb946a75e03264dad26dd66 = L.polyline(
+                [[19.4361, -99.0719], [21.0365, -86.8771]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 8.5}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_2611a7c24cb946a75e03264dad26dd66.bindTooltip(
+                `<div>
+                     MEX → CUN: 33 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_22b1d9582f76fd5089aca390b140d0c7 = L.polyline(
+                [[21.0365, -86.8771], [19.4361, -99.0719]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 8.5}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_22b1d9582f76fd5089aca390b140d0c7.bindTooltip(
+                `<div>
+                     CUN → MEX: 33 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_3c9e8cfc959ae89de203151cd2fce06f = L.polyline(
+                [[20.5218, -103.312], [19.4361, -99.0719]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 8.045454545454547}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_3c9e8cfc959ae89de203151cd2fce06f.bindTooltip(
+                `<div>
+                     GDL → MEX: 31 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_639e66cfdf58d29274dc105e0f0f21a4 = L.polyline(
+                [[19.4361, -99.0719], [25.7783, -100.107]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 7.8181818181818175}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_639e66cfdf58d29274dc105e0f0f21a4.bindTooltip(
+                `<div>
+                     MEX → MTY: 30 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_5c50782562b176b30db387f9d8bb5552 = L.polyline(
+                [[25.7783, -100.107], [19.4361, -99.0719]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 7.590909090909091}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_5c50782562b176b30db387f9d8bb5552.bindTooltip(
+                `<div>
+                     MTY → MEX: 29 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_94f826cdf674a2b2f05e0d312eb624a5 = L.polyline(
+                [[19.4361, -99.0719], [20.5218, -103.312]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 7.590909090909091}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_94f826cdf674a2b2f05e0d312eb624a5.bindTooltip(
+                `<div>
+                     MEX → GDL: 29 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_1ae93fa81b4e8de8ae6ac5f5092ef81a = L.polyline(
+                [[21.0365, -86.8771], [25.7783, -100.107]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 6.454545454545454}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_1ae93fa81b4e8de8ae6ac5f5092ef81a.bindTooltip(
+                `<div>
+                     CUN → MTY: 24 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_7c1b1b0924d5bb9b498a99ceabb9b5fb = L.polyline(
+                [[25.7783, -100.107], [21.0365, -86.8771]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 6.454545454545454}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_7c1b1b0924d5bb9b498a99ceabb9b5fb.bindTooltip(
+                `<div>
+                     MTY → CUN: 24 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_e5a3c92543b048b1a50560add648d4c7 = L.polyline(
+                [[25.7783, -100.107], [20.5218, -103.312]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 6.454545454545454}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_e5a3c92543b048b1a50560add648d4c7.bindTooltip(
+                `<div>
+                     MTY → GDL: 24 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_3765afb32045953b30a643949ba1bce8 = L.polyline(
+                [[20.5218, -103.312], [25.7783, -100.107]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 5.772727272727273}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_3765afb32045953b30a643949ba1bce8.bindTooltip(
+                `<div>
+                     GDL → MTY: 21 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_335fdb411b5da2e8d1334c34bdadf4a8 = L.polyline(
+                [[33.9416, -118.4085], [20.5218, -103.312]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 5.090909090909091}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_335fdb411b5da2e8d1334c34bdadf4a8.bindTooltip(
+                `<div>
+                     LAX → GDL: 18 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_6998e5bede8d822478e7ffc7a5c81b8c = L.polyline(
+                [[20.5218, -103.312], [33.9416, -118.4085]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 5.090909090909091}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_6998e5bede8d822478e7ffc7a5c81b8c.bindTooltip(
+                `<div>
+                     GDL → LAX: 18 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_5939193175491d9c2abad332d3e3e0c4 = L.polyline(
+                [[33.9416, -118.4085], [19.4361, -99.0719]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4.863636363636363}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_5939193175491d9c2abad332d3e3e0c4.bindTooltip(
+                `<div>
+                     LAX → MEX: 17 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_a08879533916ccd8c1c769b7d8b8da69 = L.polyline(
+                [[19.4361, -99.0719], [33.9416, -118.4085]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4.863636363636363}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_a08879533916ccd8c1c769b7d8b8da69.bindTooltip(
+                `<div>
+                     MEX → LAX: 17 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_0fa558e70f461b52240e796a35958473 = L.polyline(
+                [[20.5218, -103.312], [32.5414, -116.97]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 3.727272727272727}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_0fa558e70f461b52240e796a35958473.bindTooltip(
+                `<div>
+                     GDL → TIJ: 12 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_85989d8d6fff13cbd970ecdbb8b25c18 = L.polyline(
+                [[32.5414, -116.97], [20.5218, -103.312]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 3.5}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_85989d8d6fff13cbd970ecdbb8b25c18.bindTooltip(
+                `<div>
+                     TIJ → GDL: 11 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_2016131c69c5754b549397bb0c64825c = L.polyline(
+                [[20.5218, -103.312], [20.68, -105.253]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 3.2727272727272725}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_2016131c69c5754b549397bb0c64825c.bindTooltip(
+                `<div>
+                     GDL → PVR: 10 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_d86644529c3bacd7649b94db28429f77 = L.polyline(
+                [[20.5218, -103.312], [21.0365, -86.8771]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 3.0454545454545454}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_d86644529c3bacd7649b94db28429f77.bindTooltip(
+                `<div>
+                     GDL → CUN: 9 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_93a7109b6d784762822a1ee3c70c475a = L.polyline(
+                [[20.68, -105.253], [20.5218, -103.312]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 3.0454545454545454}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_93a7109b6d784762822a1ee3c70c475a.bindTooltip(
+                `<div>
+                     PVR → GDL: 9 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_70a51b235fffb984fa892f81ae14f3c0 = L.polyline(
+                [[21.0365, -86.8771], [20.5218, -103.312]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 3.0454545454545454}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_70a51b235fffb984fa892f81ae14f3c0.bindTooltip(
+                `<div>
+                     CUN → GDL: 9 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_bc58775501295f01a84f2a709bb32406 = L.polyline(
+                [[32.5414, -116.97], [19.4361, -99.0719]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2.590909090909091}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_bc58775501295f01a84f2a709bb32406.bindTooltip(
+                `<div>
+                     TIJ → MEX: 7 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_f740cb93a0107e91f47cac189888d177 = L.polyline(
+                [[20.68, -105.253], [25.7783, -100.107]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2.590909090909091}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_f740cb93a0107e91f47cac189888d177.bindTooltip(
+                `<div>
+                     PVR → MTY: 7 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_c4e7c097ebadb4a1264700f8afd29b87 = L.polyline(
+                [[25.7783, -100.107], [20.68, -105.253]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2.590909090909091}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_c4e7c097ebadb4a1264700f8afd29b87.bindTooltip(
+                `<div>
+                     MTY → PVR: 7 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_1a93afbd0af94c12125f52e8a146232b = L.polyline(
+                [[19.1457, -96.187], [19.4361, -99.0719]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2.3636363636363633}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_1a93afbd0af94c12125f52e8a146232b.bindTooltip(
+                `<div>
+                     VER → MEX: 6 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_c4ca418633a84587d463d1cef00d09d0 = L.polyline(
+                [[19.4361, -99.0719], [32.5414, -116.97]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2.3636363636363633}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_c4ca418633a84587d463d1cef00d09d0.bindTooltip(
+                `<div>
+                     MEX → TIJ: 6 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_ecf693494a26418171789a5d74a9b76e = L.polyline(
+                [[19.4361, -99.0719], [19.1457, -96.187]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2.3636363636363633}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_ecf693494a26418171789a5d74a9b76e.bindTooltip(
+                `<div>
+                     MEX → VER: 6 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_0f244fb0ea3ab5a7a30d536904e5e334 = L.polyline(
+                [[15.7755, -96.2618], [19.4361, -99.0719]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2.1363636363636362}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_0f244fb0ea3ab5a7a30d536904e5e334.bindTooltip(
+                `<div>
+                     HUX → MEX: 5 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_22a253bf1f205de3bde36066766abf06 = L.polyline(
+                [[19.4361, -99.0719], [15.7755, -96.2618]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2.1363636363636362}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_22a253bf1f205de3bde36066766abf06.bindTooltip(
+                `<div>
+                     MEX → HUX: 5 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_3f05c08953a058fdbd55cb2eea2ca1ff = L.polyline(
+                [[19.1457, -96.187], [20.5218, -103.312]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2.1363636363636362}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_3f05c08953a058fdbd55cb2eea2ca1ff.bindTooltip(
+                `<div>
+                     VER → GDL: 5 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_50fcf07e8471afbf6efedc16971a0cd5 = L.polyline(
+                [[20.5218, -103.312], [19.1457, -96.187]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2.1363636363636362}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_50fcf07e8471afbf6efedc16971a0cd5.bindTooltip(
+                `<div>
+                     GDL → VER: 5 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_d8f454388b285d5a436514c885edf5c9 = L.polyline(
+                [[21.0365, -86.8771], [32.5414, -116.97]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.9090909090909092}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_d8f454388b285d5a436514c885edf5c9.bindTooltip(
+                `<div>
+                     CUN → TIJ: 4 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_ab77cef0ce6dd5959fe4c63a17ddc403 = L.polyline(
+                [[32.5414, -116.97], [21.0365, -86.8771]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.9090909090909092}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_ab77cef0ce6dd5959fe4c63a17ddc403.bindTooltip(
+                `<div>
+                     TIJ → CUN: 4 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_18f61636f6c0943d07572f999f238258 = L.polyline(
+                [[25.7783, -100.107], [15.7755, -96.2618]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.9090909090909092}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_18f61636f6c0943d07572f999f238258.bindTooltip(
+                `<div>
+                     MTY → HUX: 4 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_597447518286f4603c7d55223e9e8724 = L.polyline(
+                [[32.5414, -116.97], [25.7783, -100.107]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.9090909090909092}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_597447518286f4603c7d55223e9e8724.bindTooltip(
+                `<div>
+                     TIJ → MTY: 4 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_8ae8a70f6b52531a65f178aa96fc6068 = L.polyline(
+                [[15.7755, -96.2618], [25.7783, -100.107]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.9090909090909092}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_8ae8a70f6b52531a65f178aa96fc6068.bindTooltip(
+                `<div>
+                     HUX → MTY: 4 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_00766735557a6a6eb874add005ef375f = L.polyline(
+                [[23.1516, -109.721], [20.5218, -103.312]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.6818181818181817}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_00766735557a6a6eb874add005ef375f.bindTooltip(
+                `<div>
+                     SJD → GDL: 3 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_a13611b72d8c301f5b52a97678b40c50 = L.polyline(
+                [[20.5218, -103.312], [23.1516, -109.721]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.6818181818181817}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_a13611b72d8c301f5b52a97678b40c50.bindTooltip(
+                `<div>
+                     GDL → SJD: 3 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_0ea6234d14da39ccb5846aac67b349ee = L.polyline(
+                [[17.0385, -96.7216], [25.7783, -100.107]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.4545454545454546}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_0ea6234d14da39ccb5846aac67b349ee.bindTooltip(
+                `<div>
+                     OAX → MTY: 2 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_0b4124c80b76a2b8a0d88bf7477663bd = L.polyline(
+                [[25.7783, -100.107], [32.5414, -116.97]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.4545454545454546}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_0b4124c80b76a2b8a0d88bf7477663bd.bindTooltip(
+                `<div>
+                     MTY → TIJ: 2 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_9022425643c64ad67c11903988d07fe1 = L.polyline(
+                [[19.4361, -99.0719], [20.68, -105.253]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.4545454545454546}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_9022425643c64ad67c11903988d07fe1.bindTooltip(
+                `<div>
+                     MEX → PVR: 2 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_f90c5e96f6359c5d0cf0456ea7cdc015 = L.polyline(
+                [[25.7783, -100.107], [17.0385, -96.7216]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.4545454545454546}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_f90c5e96f6359c5d0cf0456ea7cdc015.bindTooltip(
+                `<div>
+                     MTY → OAX: 2 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_8dd32124e348fe21b047fa304c85b673 = L.polyline(
+                [[20.68, -105.253], [32.5414, -116.97]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.4545454545454546}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_8dd32124e348fe21b047fa304c85b673.bindTooltip(
+                `<div>
+                     PVR → TIJ: 2 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_0f0e9231d9e3408c41e37953d32c16c0 = L.polyline(
+                [[20.68, -105.253], [19.4361, -99.0719]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.4545454545454546}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_0f0e9231d9e3408c41e37953d32c16c0.bindTooltip(
+                `<div>
+                     PVR → MEX: 2 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_39eb32dec6b8e91a1682a504089cc02e = L.polyline(
+                [[32.5414, -116.97], [20.68, -105.253]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.4545454545454546}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_39eb32dec6b8e91a1682a504089cc02e.bindTooltip(
+                `<div>
+                     TIJ → PVR: 2 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_27aa70a83ebf13dde4891e95c949173c = L.polyline(
+                [[23.1516, -109.721], [25.7783, -100.107]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.2272727272727273}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_27aa70a83ebf13dde4891e95c949173c.bindTooltip(
+                `<div>
+                     SJD → MTY: 1 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_f8b2c4e08376d0221e9b103785faa64a = L.polyline(
+                [[19.1457, -96.187], [25.7783, -100.107]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.2272727272727273}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_f8b2c4e08376d0221e9b103785faa64a.bindTooltip(
+                `<div>
+                     VER → MTY: 1 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_a34bf31144ca252e943b34c2a305a2aa = L.polyline(
+                [[19.1457, -96.187], [21.0365, -86.8771]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.2272727272727273}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_a34bf31144ca252e943b34c2a305a2aa.bindTooltip(
+                `<div>
+                     VER → CUN: 1 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_0ebcf7de204e709aa5834389b65ef41a = L.polyline(
+                [[32.5414, -116.97], [17.0385, -96.7216]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.2272727272727273}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_0ebcf7de204e709aa5834389b65ef41a.bindTooltip(
+                `<div>
+                     TIJ → OAX: 1 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_0a64e96fcfd090cf1b3c2a99c55dd89c = L.polyline(
+                [[17.0385, -96.7216], [32.5414, -116.97]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.2272727272727273}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_0a64e96fcfd090cf1b3c2a99c55dd89c.bindTooltip(
+                `<div>
+                     OAX → TIJ: 1 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_73527fe06a9469d5908d3fd1b9e3f69e = L.polyline(
+                [[25.7783, -100.107], [19.1457, -96.187]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.2272727272727273}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_73527fe06a9469d5908d3fd1b9e3f69e.bindTooltip(
+                `<div>
+                     MTY → VER: 1 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_a4a4a170b8620ffd4ad39cbda470ef79 = L.polyline(
+                [[33.9416, -118.4085], [25.7783, -100.107]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.2272727272727273}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_a4a4a170b8620ffd4ad39cbda470ef79.bindTooltip(
+                `<div>
+                     LAX → MTY: 1 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_f8d658fe243415a12b183b0aa40945ea = L.polyline(
+                [[25.7783, -100.107], [23.1516, -109.721]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.2272727272727273}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_f8d658fe243415a12b183b0aa40945ea.bindTooltip(
+                `<div>
+                     MTY → SJD: 1 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_3bc2988d5c3682ffa1168b9f82de1562 = L.polyline(
+                [[19.4361, -99.0719], [17.0385, -96.7216]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.2272727272727273}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_3bc2988d5c3682ffa1168b9f82de1562.bindTooltip(
+                `<div>
+                     MEX → OAX: 1 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_5c218e200e1c11df193e3007c763f7c3 = L.polyline(
+                [[25.7783, -100.107], [25.7959, -80.2871]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.2272727272727273}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_5c218e200e1c11df193e3007c763f7c3.bindTooltip(
+                `<div>
+                     MTY → MIA: 1 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_f25222e5bf8c5c84e9d59a82d42f46da = L.polyline(
+                [[25.7783, -100.107], [33.9416, -118.4085]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.2272727272727273}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_f25222e5bf8c5c84e9d59a82d42f46da.bindTooltip(
+                `<div>
+                     MTY → LAX: 1 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_ef5f38a7e7c8f6f17b7c43e86767f828 = L.polyline(
+                [[25.7959, -80.2871], [25.7783, -100.107]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.2272727272727273}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_ef5f38a7e7c8f6f17b7c43e86767f828.bindTooltip(
+                `<div>
+                     MIA → MTY: 1 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_cfddadb97e51b15045aab2aae2d51e83 = L.polyline(
+                [[21.0365, -86.8771], [19.1457, -96.187]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.2272727272727273}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_cfddadb97e51b15045aab2aae2d51e83.bindTooltip(
+                `<div>
+                     CUN → VER: 1 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_b0375de381819492517234cdcdb069ae = L.polyline(
+                [[17.0385, -96.7216], [19.4361, -99.0719]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 1.2272727272727273}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+            poly_line_b0375de381819492517234cdcdb069ae.bindTooltip(
+                `<div>
+                     OAX → MEX: 1 vuelos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7333b63b4548b890c1e4041132dd80d5 = L.circleMarker(
+                [40.6413, -73.7781],
+                {"bubblingMouseEvents": true, "color": "darkblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkblue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.194192377495462, "stroke": true, "weight": 3}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+        var popup_09337f027ee141ff8849434f89914b7f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_12e4c76c46b3e65ea9b894c5253fc778 = $(`<div id="html_12e4c76c46b3e65ea9b894c5253fc778" style="width: 100.0%; height: 100.0%;">JFK: 88 vuelos (entrada+salida)</div>`)[0];
+                popup_09337f027ee141ff8849434f89914b7f.setContent(html_12e4c76c46b3e65ea9b894c5253fc778);
+            
+        
+
+        circle_marker_7333b63b4548b890c1e4041132dd80d5.bindPopup(popup_09337f027ee141ff8849434f89914b7f)
+        ;
+
+        
+    
+    
+            var circle_marker_c192835121728041a6abdcdd43029986 = L.circleMarker(
+                [19.4361, -99.0719],
+                {"bubblingMouseEvents": true, "color": "darkblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkblue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 25.0, "stroke": true, "weight": 3}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+        var popup_7f3b9c2aa16730ed67931a2a914702e4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_bc364dc83597f8038ae0c6cdc36002d9 = $(`<div id="html_bc364dc83597f8038ae0c6cdc36002d9" style="width: 100.0%; height: 100.0%;">MEX: 551 vuelos (entrada+salida)</div>`)[0];
+                popup_7f3b9c2aa16730ed67931a2a914702e4.setContent(html_bc364dc83597f8038ae0c6cdc36002d9);
+            
+        
+
+        circle_marker_c192835121728041a6abdcdd43029986.bindPopup(popup_7f3b9c2aa16730ed67931a2a914702e4)
+        ;
+
+        
+    
+    
+            var circle_marker_4bf3e93aa7ad2512354a25054bc47ec2 = L.circleMarker(
+                [21.0365, -86.8771],
+                {"bubblingMouseEvents": true, "color": "darkblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkblue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.001814882032669, "stroke": true, "weight": 3}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+        var popup_b2a466175c682c3e1ca344eadbdc4989 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_37f7a0bb809333a201ce22d19165bd46 = $(`<div id="html_37f7a0bb809333a201ce22d19165bd46" style="width: 100.0%; height: 100.0%;">CUN: 248 vuelos (entrada+salida)</div>`)[0];
+                popup_b2a466175c682c3e1ca344eadbdc4989.setContent(html_37f7a0bb809333a201ce22d19165bd46);
+            
+        
+
+        circle_marker_4bf3e93aa7ad2512354a25054bc47ec2.bindPopup(popup_b2a466175c682c3e1ca344eadbdc4989)
+        ;
+
+        
+    
+    
+            var circle_marker_276007733db97f2a399cb12a7d860c3d = L.circleMarker(
+                [20.5218, -103.312],
+                {"bubblingMouseEvents": true, "color": "darkblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkblue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 19.7005444646098, "stroke": true, "weight": 3}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+        var popup_e119d9a5dbde36f31936ebe29463d911 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ec8f595c0c1745ad0c44a1577ffdf397 = $(`<div id="html_ec8f595c0c1745ad0c44a1577ffdf397" style="width: 100.0%; height: 100.0%;">GDL: 405 vuelos (entrada+salida)</div>`)[0];
+                popup_e119d9a5dbde36f31936ebe29463d911.setContent(html_ec8f595c0c1745ad0c44a1577ffdf397);
+            
+        
+
+        circle_marker_276007733db97f2a399cb12a7d860c3d.bindPopup(popup_e119d9a5dbde36f31936ebe29463d911)
+        ;
+
+        
+    
+    
+            var circle_marker_7055c107b9d338ccc0971a59673c5171 = L.circleMarker(
+                [25.7783, -100.107],
+                {"bubblingMouseEvents": true, "color": "darkblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkblue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.439201451905628, "stroke": true, "weight": 3}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+        var popup_103ba63d431df954ab6d72fa2969f651 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_155f7baf06ee339ca95f9fbb246ea816 = $(`<div id="html_155f7baf06ee339ca95f9fbb246ea816" style="width: 100.0%; height: 100.0%;">MTY: 508 vuelos (entrada+salida)</div>`)[0];
+                popup_103ba63d431df954ab6d72fa2969f651.setContent(html_155f7baf06ee339ca95f9fbb246ea816);
+            
+        
+
+        circle_marker_7055c107b9d338ccc0971a59673c5171.bindPopup(popup_103ba63d431df954ab6d72fa2969f651)
+        ;
+
+        
+    
+    
+            var circle_marker_a817bbfa4427c6214b8cf312eb747221 = L.circleMarker(
+                [33.9416, -118.4085],
+                {"bubblingMouseEvents": true, "color": "darkblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkblue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.613430127041742, "stroke": true, "weight": 3}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+        var popup_cd521f60cf7a0c820c2d3e12d1091f21 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c92997472aae126feaa3ab8745b50c94 = $(`<div id="html_c92997472aae126feaa3ab8745b50c94" style="width: 100.0%; height: 100.0%;">LAX: 72 vuelos (entrada+salida)</div>`)[0];
+                popup_cd521f60cf7a0c820c2d3e12d1091f21.setContent(html_c92997472aae126feaa3ab8745b50c94);
+            
+        
+
+        circle_marker_a817bbfa4427c6214b8cf312eb747221.bindPopup(popup_cd521f60cf7a0c820c2d3e12d1091f21)
+        ;
+
+        
+    
+    
+            var circle_marker_39842f8e55a27a20733f460a1697c6ca = L.circleMarker(
+                [32.5414, -116.97],
+                {"bubblingMouseEvents": true, "color": "darkblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkblue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.1016333938294, "stroke": true, "weight": 3}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+        var popup_25b91e29f1e6a0d6a7323afc7ac17f17 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5a86e8f0b688ff79f0be30a7b208af13 = $(`<div id="html_5a86e8f0b688ff79f0be30a7b208af13" style="width: 100.0%; height: 100.0%;">TIJ: 113 vuelos (entrada+salida)</div>`)[0];
+                popup_25b91e29f1e6a0d6a7323afc7ac17f17.setContent(html_5a86e8f0b688ff79f0be30a7b208af13);
+            
+        
+
+        circle_marker_39842f8e55a27a20733f460a1697c6ca.bindPopup(popup_25b91e29f1e6a0d6a7323afc7ac17f17)
+        ;
+
+        
+    
+    
+            var circle_marker_9051f3e72dee1d87fc4412af30e858ed = L.circleMarker(
+                [15.7755, -96.2618],
+                {"bubblingMouseEvents": true, "color": "darkblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkblue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.379310344827586, "stroke": true, "weight": 3}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+        var popup_fa3f11514885022dd8e6cd4572a4a060 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9a36b287fa2fa48e1b1d1f5b3918ef01 = $(`<div id="html_9a36b287fa2fa48e1b1d1f5b3918ef01" style="width: 100.0%; height: 100.0%;">HUX: 38 vuelos (entrada+salida)</div>`)[0];
+                popup_fa3f11514885022dd8e6cd4572a4a060.setContent(html_9a36b287fa2fa48e1b1d1f5b3918ef01);
+            
+        
+
+        circle_marker_9051f3e72dee1d87fc4412af30e858ed.bindPopup(popup_fa3f11514885022dd8e6cd4572a4a060)
+        ;
+
+        
+    
+    
+            var circle_marker_139abe73f84c86682b276fa742f21600 = L.circleMarker(
+                [20.68, -105.253],
+                {"bubblingMouseEvents": true, "color": "darkblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkblue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.923774954627949, "stroke": true, "weight": 3}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+        var popup_2e1ec1cd31a49cefc80fd5a4630d9517 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9609e5cbb1ca58c7d4edfda1eed28fec = $(`<div id="html_9609e5cbb1ca58c7d4edfda1eed28fec" style="width: 100.0%; height: 100.0%;">PVR: 53 vuelos (entrada+salida)</div>`)[0];
+                popup_2e1ec1cd31a49cefc80fd5a4630d9517.setContent(html_9609e5cbb1ca58c7d4edfda1eed28fec);
+            
+        
+
+        circle_marker_139abe73f84c86682b276fa742f21600.bindPopup(popup_2e1ec1cd31a49cefc80fd5a4630d9517)
+        ;
+
+        
+    
+    
+            var circle_marker_70f04c800f045d030b84ed7aedd5a6d9 = L.circleMarker(
+                [19.1457, -96.187],
+                {"bubblingMouseEvents": true, "color": "darkblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkblue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.306715063520871, "stroke": true, "weight": 3}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+        var popup_fe3a95f55076c09431da78dd12bf9b55 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_385ee8bd8d173284ee6ef76c3adf007b = $(`<div id="html_385ee8bd8d173284ee6ef76c3adf007b" style="width: 100.0%; height: 100.0%;">VER: 36 vuelos (entrada+salida)</div>`)[0];
+                popup_fe3a95f55076c09431da78dd12bf9b55.setContent(html_385ee8bd8d173284ee6ef76c3adf007b);
+            
+        
+
+        circle_marker_70f04c800f045d030b84ed7aedd5a6d9.bindPopup(popup_fe3a95f55076c09431da78dd12bf9b55)
+        ;
+
+        
+    
+    
+            var circle_marker_a2dd895e1ba2a5dcd4b98f508784de68 = L.circleMarker(
+                [23.1516, -109.721],
+                {"bubblingMouseEvents": true, "color": "darkblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkblue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.43557168784029, "stroke": true, "weight": 3}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+        var popup_e5b7aea3b58e79369ae7d38fc567234b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4ddab4767cbda7ee5df3be44b2be6b94 = $(`<div id="html_4ddab4767cbda7ee5df3be44b2be6b94" style="width: 100.0%; height: 100.0%;">SJD: 12 vuelos (entrada+salida)</div>`)[0];
+                popup_e5b7aea3b58e79369ae7d38fc567234b.setContent(html_4ddab4767cbda7ee5df3be44b2be6b94);
+            
+        
+
+        circle_marker_a2dd895e1ba2a5dcd4b98f508784de68.bindPopup(popup_e5b7aea3b58e79369ae7d38fc567234b)
+        ;
+
+        
+    
+    
+            var circle_marker_adc7a87ca46a1e03e85934bf80c8e48a = L.circleMarker(
+                [17.0385, -96.7216],
+                {"bubblingMouseEvents": true, "color": "darkblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkblue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.362976406533575, "stroke": true, "weight": 3}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+        var popup_c14c97a172ed1b19c8feec7ae1515d34 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_439874c7e03b02c0ac99d3bf7cec85bd = $(`<div id="html_439874c7e03b02c0ac99d3bf7cec85bd" style="width: 100.0%; height: 100.0%;">OAX: 10 vuelos (entrada+salida)</div>`)[0];
+                popup_c14c97a172ed1b19c8feec7ae1515d34.setContent(html_439874c7e03b02c0ac99d3bf7cec85bd);
+            
+        
+
+        circle_marker_adc7a87ca46a1e03e85934bf80c8e48a.bindPopup(popup_c14c97a172ed1b19c8feec7ae1515d34)
+        ;
+
+        
+    
+    
+            var circle_marker_30672bfadaffdb3a12dece307ecf02a6 = L.circleMarker(
+                [25.7959, -80.2871],
+                {"bubblingMouseEvents": true, "color": "darkblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkblue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.072595281306715, "stroke": true, "weight": 3}
+            ).addTo(map_4c1fd4ec810b9a4bbc6ba5ca8d9e1d5d);
+        
+    
+        var popup_a94d2de44de4b18d1595f0e63c9ada22 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_653581107f52f8286a281043ca2e5856 = $(`<div id="html_653581107f52f8286a281043ca2e5856" style="width: 100.0%; height: 100.0%;">MIA: 2 vuelos (entrada+salida)</div>`)[0];
+                popup_a94d2de44de4b18d1595f0e63c9ada22.setContent(html_653581107f52f8286a281043ca2e5856);
+            
+        
+
+        circle_marker_30672bfadaffdb3a12dece307ecf02a6.bindPopup(popup_a94d2de44de4b18d1595f0e63c9ada22)
+        ;
+
+        
+    
+</script>
+</html>

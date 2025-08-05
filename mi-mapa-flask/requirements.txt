@@ -1,4 +1,5 @@
 flask
-folium
 pandas
-openpyxl
+folium
+selenium
+webdriver-manager
